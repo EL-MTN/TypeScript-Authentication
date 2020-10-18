@@ -1,0 +1,14 @@
+extend ../layout/layout.pug
+
+block content
+	form(action="/signup" method="POST")
+		| Username (You can change this later): 
+		input(name="username" type="text")
+		br
+		| Email: 
+		input(name="email" type="email")
+		br
+		| Password: 
+		input(name="password" type="password")
+		br
+		input(type="submit" value="Sign Up")
