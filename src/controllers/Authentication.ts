@@ -42,6 +42,9 @@ Authentication.get('/verify', async (req, res) => {
 Authentication.post('/signup', async (req, res) => {
 	await check('username', 'Username must be alphanumeric and at least 5 letters long')
 		.isLength({ min: 5 })
+		.bail()
+		.isAlphanumeric()
+		.bail()
 		.custom(async (username) => {
 			if (
 				(await User.findOne({ username: username })) ||
@@ -50,7 +53,6 @@ Authentication.post('/signup', async (req, res) => {
 				return Promise.reject('Username already in use, try another one');
 			}
 		})
-		.isAlphanumeric()
 		.run(req);
 
 	await check('password', 'Password should be at least 5 characters long')
@@ -58,6 +60,7 @@ Authentication.post('/signup', async (req, res) => {
 		.run(req);
 	await check('email', 'Email is invalid')
 		.isEmail()
+		.bail()
 		.custom(async (email) => {
 			if (
 				(await User.findOne({ email: email })) ||

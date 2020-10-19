@@ -2,12 +2,12 @@ if messages
 	if messages.error
 		.alert.alert-danger.fade.show
 			button.close(type='button' data-dismiss='alert')
-				i.fa.fa-times-circle-o
+				p x
 			for err in messages.error
 				div= err
 	if messages.info
 		.alert.alert-info.fade.show
 			button.close(type='button' data-dismiss='alert')
-				i.fa.fa-times-circle-o
+				p x
 			for inf in messages.info
 				div= inf

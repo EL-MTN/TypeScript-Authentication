@@ -16,6 +16,7 @@ This project provides everything needed to create a simple authentication softwa
 - Run ```npm install``` to install packages
 - Change any variables in [.env](.env)
 - Change anything labeled with the syntax **//TODO: something**, you can search for them in the editor
+- Modify [favicon.png](/public/images/favicon.png) into your own favicon
 - Start the project using ```npm start```
 
 ### Project Structure
