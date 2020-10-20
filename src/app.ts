@@ -11,6 +11,11 @@ import { User } from './controllers/User';
 
 config();
 
+if (!process.env.COOKIE_SECRET || !process.env.MONGO_URI) {
+	console.log('Please change .env variables');
+	process.exit(1);
+}
+
 export const app = express();
 
 const MongoStore = createMongoStore(session);
@@ -22,10 +27,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
 	session({
-		secret: process.env.COOKIE_SECRET!,
+		secret: process.env.COOKIE_SECRET,
 		resave: false,
 		saveUninitialized: false,
-		store: new MongoStore({ url: process.env.MONGO_URI! }),
+		store: new MongoStore({ url: process.env.MONGO_URI }),
 		cookie: {
 			// TODO: SET COOKIE MAX AGE
 			maxAge: 3600 * 1000,

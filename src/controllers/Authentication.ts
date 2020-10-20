@@ -33,8 +33,13 @@ Authentication.get('/verify', async (req, res) => {
 	});
 	await user.save();
 
-	req.session!.userId = user._id;
-	req.session!.username = user.username;
+	if (req.session) {
+		req.session.username = user.username;
+		req.session.userId = user._id;
+	} else {
+		req.flash('error', 'Session disabled');
+		return res.redirect('/login');
+	}
 
 	res.redirect('/home');
 });
@@ -117,8 +122,13 @@ Authentication.post('/login', async (req, res) => {
 			return res.redirect('/login');
 		}
 
-		req.session!.username = user.username;
-		req.session!.userId = user._id;
+		if (req.session) {
+			req.session.username = user.username;
+			req.session.userId = user._id;
+		} else {
+			req.flash('error', 'Session disabled');
+			return res.redirect('/login');
+		}
 
 		return res.redirect('/home');
 	} else {

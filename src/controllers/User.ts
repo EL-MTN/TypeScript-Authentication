@@ -6,5 +6,10 @@ export const User = Router();
 User.use(AuthCheck);
 
 User.get('/home', (req, res) => {
-	res.render('user/home', { username: req.session!.username });
+	if (!req.session) {
+		req.flash('error', 'Session disabled');
+		return res.redirect('/login');
+	}
+
+	res.render('user/home', { username: req.session.username });
 });

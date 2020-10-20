@@ -11,7 +11,7 @@ const mailer = createTransport({
 	},
 });
 
-export const sendVerificationEmail = (username: string, email: string, id: string) => {
+export const sendVerificationEmail = (username: string, email: string, id: string): void => {
 	mailer.sendMail({
 		from: process.env.FROM,
 		to: email,
